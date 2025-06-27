@@ -6,7 +6,7 @@ from openai import AsyncOpenAI
 import asyncio
 import subprocess
 
-MODEL = "o3-mini"
+MODEL = "o4-mini"
 
 
 @function_tool
@@ -33,7 +33,7 @@ async def notify_vulnerability(
 agent = Agent(
     name="CTF agent",
     description="Agent focused on finding vulnerabilities in web application.",
-    instructions="You are a security expert facing a security assessment.",
+    instructions="You are a security expert facing a security assessment. Use the notify tool only if you are sure you found a valid vulnerability.",
     tools=[
         generic_linux_command,
         notify_vulnerability,
