@@ -76,12 +76,61 @@ The Docker environment includes popular tools:
 
 ## ⚙️ Configuration
 
-Create an `env_file` with your API credentials:
+Create an `env_file` with your API credentials. Copy the provided sample and edit it with your keys:
 ```bash
 OPENAI_API_KEY=your_openai_key_here
 GEMINI_API_KEY=your_gemini_key_here
+LLM_GEMINI_KEY=your_gemini_key_here
+PDCP_API_KEY=your_pdcp_key_here
 ...
 ```
+
+Load the variables before running the tools:
+```bash
+export $(grep -v '^#' env_file | xargs)
+```
+
+## 🧑‍💻 Usage Examples
+
+### Screenshot classification
+
+Categorize a folder of screenshots using Google Gemini:
+
+```bash
+python workspace/llm_screenshot_classifier.py
+```
+
+### NLP keyword extraction
+
+Generate a wordlist from text files:
+
+```bash
+python workspace/nlp.py path/to/file.txt > keywords.txt
+```
+
+### Web scraping
+
+Extract company information from a URL:
+
+```bash
+python workspace/scrape.py https://example.com
+```
+
+### CAI agent example
+
+Run a simple XSS helper agent (requires Notify to be configured):
+
+```bash
+python workspace/cai_custom_xss_tool_with_notify.py
+```
+
+## 🏗️ Example Workshop Flow
+
+1. Enumerate targets with `subfinder` and resolve with `puredns`.
+2. Probe discovered hosts using `httpx` and capture screenshots with `eyeballer`.
+3. Run the screenshot classifier to triage interesting applications.
+4. Scrape pages of interest and extract keywords to build custom wordlists.
+5. Use nuclei, ffuf/ffufai and other tools to continue the assessment.
 
 ## 🎓 Educational Use Only
 
